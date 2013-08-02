@@ -284,6 +284,15 @@
 * CF2BrCl (Halon-1211) + hv -> Products
       CALL r41(nw,wl,wc,nz,tlev,airden,j,sq,jlabel)
 
+* (CH3)2NNO -> products
+      call r124(nw,wl,wc,nz,tlev,airden,j,sq,jlabel)
+
+* ClO -> Cl + O
+      call r125(nw,wl,wc,nz,tlev,airden,j,sq,jlabel)
+
+* ClNO2 -> Cl + NO2
+      call r126(nw,wl,wc,nz,tlev,airden,j,sq,jlabel)
+
 ******************************************
 * Additions from the DSMACC version of TUV
 * nC3H7CHO -> nC3H7 + HCO
