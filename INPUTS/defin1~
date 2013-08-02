@@ -1,40 +1,40 @@
-TUV inputs:
+TUV input file
 ==================================================================
-inpfil =      usrinp   outfil =      usrout   nstr =             4
+inpfil =      defin1   outfil =      usrout   nstr =            -2
 lat =          0.000   lon =          0.000   tmzone =         0.0
 iyear =         2002   imonth =           3   iday =            21
-zstart =       0.000   zstop =      120.000   nz =             121
-wstart =     120.000   wstop =      735.000   nwint =         -156
+zstart =       0.000   zstop =       80.000   nz =              81
+wstart =     280.000   wstop =      420.000   nwint =          140
 tstart =      12.000   tstop =       20.000   nt =               5
 lzenit =           F   alsurf =       0.100   psurf =       -999.0
 o3col =      300.000   so2col =       0.000   no2col =       0.000
 taucld =       0.000   zbase =        4.000   ztop =         5.000
 tauaer =       0.235   ssaaer =       0.990   alpha =        1.000
-dirsun =       1.000   difdn =        1.000   difup =        1.000
-zout =         0.500   zaird =   -9.990E+02   ztemp =     -999.000
-lirrad =           F   laflux =           T   lmmech =           F
-lrates =           F   isfix =            0   nms =              0
-ljvals =           T   ijfix =            0   nmj =              4
+dirsun =       1.000   difdn =        1.000   difup =        0.000
+zout =         0.000   zaird =   -9.990E+02   ztemp =     -999.000
+lirrad =           T   laflux =           F   lmmech =           F
+lrates =           T   isfix =            0   nms =              7
+ljvals =           F   ijfix =            0   nmj =              0
 iwfix =            0   itfix =            0   izfix =            0
 ==================================================================
-===== Avaliable spectral weighting functions:
-F  1 UV-B, 280-315 nm                                  
+===== Available spectral weighting functions:
+T  1 UV-B, 280-315 nm                                  
 F  2 UV-B*, 280-320 nm                                 
-F  3 UV-A, 315-400 nm                                  
+T  3 UV-A, 315-400 nm                                  
 F  4 vis+, > 400 nm                                    
 F  5 Gaussian, 305 nm, 10 nm FWHM                      
-F  6 Gaussian, 320 nm, 10 nm FWHM                      
+T  6 Gaussian, 320 nm, 10 nm FWHM                      
 F  7 Gaussian, 340 nm, 10 nm FWHM                      
 F  8 Gaussian, 380 nm, 10 nm FWHM                      
-F  9 RB Meter, model 501                               
+T  9 RB Meter, model 501                               
 F 10 Eppley UV Photometer                              
 F 11 PAR, 400-700 nm, umol m-2 s-1                     
 F 12 Exponential decay, 14 nm/10                       
-F 13 DNA damage, in vitro (Setlow, 1974)               
+T 13 DNA damage, in vitro (Setlow, 1974)               
 F 14 SCUP-mice (de Gruijl et al., 1993)                
 F 15 SCUP-human (de Gruijl and van der Leun, 1994)     
 F 16 CIE human erythema (McKinlay and Diffey, 1987)    
-F 17 UV index (WMO, 1994)                              
+T 17 UV index (WMO, 1994)                              
 F 18 Erythema, humans (Anders et al., 1995)            
 F 19 Occupational TLV (ACGIH, 1992)                    
 F 20 Phytoplankton (Boucher et al., 1994)              
@@ -43,9 +43,9 @@ F 22 Phytoplankton, proro (Cullen et al., 1992)
 F 23 Cataract, pig (Oriowo et al., 2001)               
 F 24 Plant damage (Caldwell, 1971)                     
 F 25 Plant damage (Flint & Caldwell, 2003)             
-F 26 Previtamin-D3 (CIE 2006)                          
+T 26 Previtamin-D3 (CIE 2006)                          
 F 27 NMSC (CIE 2006)                                   
-===== Available photolysis reactions:
+===== Available photolysis reactions
 F  1 O2 -> O + O                                       
 F  2 O3 -> O2 + O(1D)                                  
 F  3 O3 -> O2 + O(3P)                                  
@@ -129,11 +129,11 @@ F 80 CHBr3 -> Products
 F 81 CF3Br (Halon-1301) -> Products                    
 F 82 CF2BrCF2Br (Halon-2402) -> Products               
 F 83 CF2Br2 (Halon-1202) -> Products                   
-F 84 CF2BrCl (Halon-1211) -> Products                  
-T 85 (CH3)2NNO -> Products                             
-T 86 ClO -> Cl + O(1D)                                 
-T 87 ClO -> Cl + O(3P)                                 
-T 88 ClNO2 -> Cl + NO2                                 
+F 84 CF2BrCl (Halon-1211) -> Products  
+F 85
+F 86
+F 87
+F 88                
 F 89 nC3H7CHO -> nC3H7 + HCO                           
 F 90 nC3H7CHO -> C2H4 + CH3CHO                         
 F 91 iC3H7CHO -> iC3H7 + HCO                           
@@ -179,5 +179,5 @@ F130 CH3C(O)CH2CH(CH3)2 -> CH3C(O)CH3 + CH2=CHCH3
 F131 CH3C(O)C3H5(CH3)2 -> CH3CO + (CH3)2C3H5           
 F132 CH3C(O)C3H5(CH3)2 -> CH3C(O)CH3 + CH2=CHCH(CH3)2  
 F133 CH3OONO2 -> CH3O2 + NO2                           
-F134 CH3OONO2 -> CH3O + NO3                            
+F134 CH3OONO2 -> CH3O + NO3   
 ==================================================================

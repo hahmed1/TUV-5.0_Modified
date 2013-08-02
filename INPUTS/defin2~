@@ -1,6 +1,6 @@
-TUV inputs:
+TUV input file
 ==================================================================
-inpfil =      usrinp   outfil =      usrout   nstr =             4
+inpfil =      defin2   outfil =      usrout   nstr =             4
 lat =          0.000   lon =          0.000   tmzone =         0.0
 iyear =         2002   imonth =           3   iday =            21
 zstart =       0.000   zstop =      120.000   nz =             121
@@ -14,10 +14,10 @@ dirsun =       1.000   difdn =        1.000   difup =        1.000
 zout =         0.500   zaird =   -9.990E+02   ztemp =     -999.000
 lirrad =           F   laflux =           T   lmmech =           F
 lrates =           F   isfix =            0   nms =              0
-ljvals =           T   ijfix =            0   nmj =              4
+ljvals =           T   ijfix =            0   nmj =              7
 iwfix =            0   itfix =            0   izfix =            0
 ==================================================================
-===== Avaliable spectral weighting functions:
+===== Available spectral weighting functions:
 F  1 UV-B, 280-315 nm                                  
 F  2 UV-B*, 280-320 nm                                 
 F  3 UV-A, 315-400 nm                                  
@@ -45,12 +45,12 @@ F 24 Plant damage (Caldwell, 1971)
 F 25 Plant damage (Flint & Caldwell, 2003)             
 F 26 Previtamin-D3 (CIE 2006)                          
 F 27 NMSC (CIE 2006)                                   
-===== Available photolysis reactions:
-F  1 O2 -> O + O                                       
-F  2 O3 -> O2 + O(1D)                                  
+===== Available photolysis reactions
+F  1 O2 -> O + O                                        
+T  2 O3 -> O2 + O(1D)                                  
 F  3 O3 -> O2 + O(3P)                                  
 F  4 HO2 -> OH + O                                     
-F  5 H2O2 -> 2 OH                                      
+T  5 H2O2 -> 2 OH                                      
 F  6 NO2 -> NO + O(3P)                                 
 F  7 NO3 -> NO + O2                                    
 F  8 NO3 -> NO2 + O(3P)                                
@@ -62,8 +62,8 @@ F 13 HNO3 -> OH + NO2
 F 14 HNO4 -> HO2 + NO2                                 
 F 15 NO3-(aq) -> NO2(aq) + O-                          
 F 16 NO3-(aq) -> NO2-(aq) + O(3P)                      
-F 17 CH2O -> H + HCO                                   
-F 18 CH2O -> H2 + CO                                   
+T 17 CH2O -> H + HCO                                   
+T 18 CH2O -> H2 + CO                                   
 F 19 CH3CHO -> CH3 + HCO                               
 F 20 CH3CHO -> CH4 + CO                                
 F 21 CH3CHO -> CH3CO + H                               
@@ -91,7 +91,7 @@ F 42 CH3CO(OONO2) -> CH3CO(O) + NO3
 F 43 CH3CH2CO(OONO2) -> CH3CH2CO(OO) + NO2             
 F 44 CH3CH2CO(OONO2) -> CH3CH2CO(O) + NO3              
 F 45 CHOCHO -> 2CO + H2                                
-F 46 CHOCHO -> HCO + HCO                               
+F 46 CHOCHO -> Awesome                               
 F 47 CHOCHO -> CH2O + CO                               
 F 48 CH3COCHO -> CH3CO + HCO                           
 F 49 CH3COCOCH3 -> Products                            
@@ -130,54 +130,50 @@ F 81 CF3Br (Halon-1301) -> Products
 F 82 CF2BrCF2Br (Halon-2402) -> Products               
 F 83 CF2Br2 (Halon-1202) -> Products                   
 F 84 CF2BrCl (Halon-1211) -> Products                  
-T 85 (CH3)2NNO -> Products                             
-T 86 ClO -> Cl + O(1D)                                 
-T 87 ClO -> Cl + O(3P)                                 
-T 88 ClNO2 -> Cl + NO2                                 
-F 89 nC3H7CHO -> nC3H7 + HCO                           
-F 90 nC3H7CHO -> C2H4 + CH3CHO                         
-F 91 iC3H7CHO -> iC3H7 + HCO                           
-F 92 nC4H9CHO -> nC4H9 + HCO                           
-F 93 nC4H9CHO -> C3H6 + CH3CHO                         
-F 94 iC4H9CHO -> iC4H9 + HCO                           
-F 95 iC4H9CHO -> C3H6 + CH3CHO                         
-F 96 tC4H9CHO -> tC4H9 + HCO                           
-F 97 nC5H11CHO -> nC5H11 + HCO                         
-F 98 nC5H11CHO -> C4H8 + CH3CHO                        
-F 99 nC6H13CHO -> nC6H13 + HCO                         
-F100 nC6H13CHO -> C5H10 + CH3CHO                       
-F101 CH3COC2H5 -> C2H5 + CH3CO                         
-F102 pinonaldehyde -> products                         
-F103 CH2CHCHO -> CH2CHCO + H                           
-F104 CH2CHCHO -> CH2CH + HCO                           
-F105 nC3H7ONO2 -> nC3H7O + NO2                         
-F106 nC4H9ONO2 -> nC4H9O + NO2                         
-F107 iC4H9ONO2 -> iC4H9O + NO2                         
-F108 2-C4H9ONO2 -> 2-C4H9O + NO2                       
-F109 nC5H11ONO2 -> nC5H11O + NO2                       
-F110 2-C5H11ONO2 -> 2-C5H11O + NO2                     
-F111 3-C5H11ONO2 -> 3-C5H11O + NO2                     
-F112 i-C5H11ONO2 -> i-C5H11O + NO2                     
-F113 CH3CH2C(O)CH2(ONO2) -> CH3CH2C(O)CH2(O.) + NO2    
-F114 CH3CH(ONO2)C(O)CH3 -> CH3CH(O.)C(O)CH3 + NO2      
-F115 CH3CH(ONO2)CH2(ONO2) -> CH3CH(O.)CH2(ONO2) + NO2  
-F116 CH3CH(ONO2)CH2(ONO2) -> CH3CH(ONO2)CH2(O.) + NO2  
-F117 C2H5CH(ONO2)CH2(ONO2) -> C2H5CH(O.)CH2(ONO2) + NO2
-F118 C2H5CH(ONO2)CH2(ONO2) -> C2H5CH(ONO2)CH2(O.) + NO2
-F119 CH3CH(ONO2)CH(ONO2)CH3 -> CH3CH(O.)CH(ONO2)CH3 + N
-F120 CH2=CHCH(ONO2)CH2(ONO2) -> C2H3CH(O.)CH2(ONO2) + N
-F121 CH2=CHCH(ONO2)CH2(ONO2) -> C2H3CH(ONO2)CH2(O.) + N
-F122 CH2(ONO2)C2H2CH2(ONO2) -> CH2(ONO2)C2H2CH2(O.) + N
-F123 CH3CH=CHCHO -> CH3CH=CHCO + H                     
-F124 CH3CH=CHCHO -> CH3CH=CH + HCO                     
-F125 CH3CH=CHCHO -> CH3CH=CH2 + CO                     
-F126 CH3COC3H7 -> C3H7 + CH3CO                         
-F127 C2H5COC2H5 -> C2H5 + C2H5CO                       
-F128 ((CH3)2CH)2C(O) -> (CH3)2C + (CH3)2CHCO           
-F129 CH3C(O)CH2CH(CH3)2 -> CH3CO + (CH3)2CHCH2         
-F130 CH3C(O)CH2CH(CH3)2 -> CH3C(O)CH3 + CH2=CHCH3      
-F131 CH3C(O)C3H5(CH3)2 -> CH3CO + (CH3)2C3H5           
-F132 CH3C(O)C3H5(CH3)2 -> CH3C(O)CH3 + CH2=CHCH(CH3)2  
-F133 CH3OONO2 -> CH3O2 + NO2                           
-F134 CH3OONO2 -> CH3O + NO3                            
+F 85 nC3H7CHO -> nC3H7 + HCO                           
+F 86 nC3H7CHO -> C2H4 + CH3CHO                         
+F 87 iC3H7CHO -> iC3H7 + HCO                           
+F 88 nC4H9CHO -> nC4H9 + HCO                           
+F 89 nC4H9CHO -> C3H6 + CH3CHO                         
+F 90 iC4H9CHO -> iC4H9 + HCO                           
+F 91 iC4H9CHO -> C3H6 + CH3CHO                         
+F 92 tC4H9CHO -> tC4H9 + HCO                           
+F 93 nC5H11CHO -> nC5H11 + HCO                         
+F 94 nC5H11CHO -> C4H8 + CH3CHO                        
+F 95 nC6H13CHO -> nC6H13 + HCO                         
+F 96 nC6H13CHO -> C5H10 + CH3CHO                       
+F 97 CH3COC2H5 -> C2H5 + CH3CO                         
+F 98 pinonaldehyde -> products                         
+F 99 CH2CHCHO -> CH2CHCO + H                           
+F100 CH2CHCHO -> CH2CH + HCO                           
+F101 nC3H7ONO2 -> nC3H7O + NO2                         
+F102 nC4H9ONO2 -> nC4H9O + NO2                         
+F103 iC4H9ONO2 -> iC4H9O + NO2                         
+F104 2-C4H9ONO2 -> 2-C4H9O + NO2                       
+F105 nC5H11ONO2 -> nC5H11O + NO2                       
+F106 2-C5H11ONO2 -> 2-C5H11O + NO2                     
+F107 3-C5H11ONO2 -> 3-C5H11O + NO2                     
+F108 i-C5H11ONO2 -> i-C5H11O + NO2                     
+F109 CH3CH2C(O)CH2(ONO2) -> CH3CH2C(O)CH2(O.) + NO2    
+F110 CH3CH(ONO2)C(O)CH3 -> CH3CH(O.)C(O)CH3 + NO2      
+F111 CH3CH(ONO2)CH2(ONO2) -> CH3CH(O.)CH2(ONO2) + NO2  
+F112 CH3CH(ONO2)CH2(ONO2) -> CH3CH(ONO2)CH2(O.) + NO2  
+F113 C2H5CH(ONO2)CH2(ONO2) -> C2H5CH(O.)CH2(ONO2) + NO2
+F114 C2H5CH(ONO2)CH2(ONO2) -> C2H5CH(ONO2)CH2(O.) + NO2
+F115 CH3CH(ONO2)CH(ONO2)CH3 -> CH3CH(O.)CH(ONO2)CH3 + N
+F116 CH2=CHCH(ONO2)CH2(ONO2) -> C2H3CH(O.)CH2(ONO2) + N
+F117 CH2=CHCH(ONO2)CH2(ONO2) -> C2H3CH(ONO2)CH2(O.) + N
+F118 CH2(ONO2)C2H2CH2(ONO2) -> CH2(ONO2)C2H2CH2(O.) + N
+F119 CH3CH=CHCHO -> CH3CH=CHCO + H                     
+F120 CH3CH=CHCHO -> CH3CH=CH + HCO                     
+F121 CH3CH=CHCHO -> CH3CH=CH2 + CO                     
+F122 CH3COC3H7 -> C3H7 + CH3CO                         
+F123 C2H5COC2H5 -> C2H5 + C2H5CO                       
+F124 ((CH3)2CH)2C(O) -> (CH3)2C + (CH3)2CHCO           
+F125 CH3C(O)CH2CH(CH3)2 -> CH3CO + (CH3)2CHCH2         
+F126 CH3C(O)CH2CH(CH3)2 -> CH3C(O)CH3 + CH2=CHCH3      
+F127 CH3C(O)C3H5(CH3)2 -> CH3CO + (CH3)2C3H5           
+F128 CH3C(O)C3H5(CH3)2 -> CH3C(O)CH3 + CH2=CHCH(CH3)2  
+F129 CH3OONO2 -> CH3O2 + NO2                           
+F130 CH3OONO2 -> CH3O + NO3                        
 ==================================================================

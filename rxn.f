@@ -11645,6 +11645,385 @@ c             sq(j,iz,iw) = qy * EXP(sum)
       ENDDO 
 
       END
+*=============================================================================*
+
+      SUBROUTINE r124(nw,wl,wc,nz,tlev,airden,j,sq,jlabel)
+
+*-----------------------------------------------------------------------------*
+*=  PURPOSE:                                                                 =*
+*=  Provide product (cross section) x (quantum yield) for dimethyl nitroso   =*
+*=  amine photolysis:                                                        =*
+*=       (CH3)2NNO + hv -> Products                                          =*
+*=                                                                           =*
+*=  Cross section: from Lindley 1978 (cited by Calvert et al. 2009)
+*=  Quantum yield: Assumed to be unity                                       =*
+*-----------------------------------------------------------------------------*
+*=  PARAMETERS:                                                              =*
+*=  NW     - INTEGER, number of specified intervals + 1 in working        (I)=*
+*=           wavelength grid                                                 =*
+*=  WL     - REAL, vector of lower limits of wavelength intervals in      (I)=*
+*=           working wavelength grid                                         =*
+*=  WC     - REAL, vector of center points of wavelength intervals in     (I)=*
+*=           working wavelength grid                                         =*
+*=  NZ     - INTEGER, number of altitude levels in working altitude grid  (I)=*
+*=  TLEV   - REAL, temperature (K) at each specified altitude level       (I)=*
+*=  AIRDEN - REAL, air density (molec/cc) at each altitude level          (I)=*
+*=  J      - INTEGER, counter for number of weighting functions defined  (IO)=*
+*=  SQ     - REAL, cross section x quantum yield (cm^2) for each          (O)=*
+*=           photolysis reaction defined, at each defined wavelength and     =*
+*=           at each defined altitude level                                  =*
+*=  JLABEL - CHARACTER*50, string identifier for each photolysis reaction (O)=*
+*=           defined                                                         =*
+*-----------------------------------------------------------------------------*
+
+      IMPLICIT NONE
+      INCLUDE 'params'
+
+* input
+
+      INTEGER nw
+      REAL wl(kw), wc(kw)
+      
+      INTEGER nz
+
+      REAL tlev(kz)
+      REAL airden(kz)
+
+* weighting functions
+
+      CHARACTER*50 jlabel(kj)
+      REAL sq(kj,kz,kw)
+
+* input/output:
+
+      INTEGER j
+
+* data arrays
+
+      INTEGER kdata
+      PARAMETER(kdata=150)
+
+      INTEGER iw
+      INTEGER i, n
+      REAL x1(kdata)
+      REAL y1(kdata)
+      INTEGER ierr
+
+* local
+
+      REAL yg(kw)
+      REAL qy
+
+**************** dmna photodissociation
+
+      j = j+1
+      jlabel(j) = '(CH3)2NNO -> Products'
+
+* cross section from 
+* Lindley (1978, PhD Thesis Ohio State U., Jack Calvert advisor), cited by Calvert et al. (2009).
+
+      OPEN(UNIT=kin,FILE='DATAJ1/ABS/dmna.abs',STATUS='OLD')
+      DO i = 1, 5
+         READ(kin,*)
+      ENDDO
+      n = 132
+      DO i = 1, n
+         READ(kin,*) x1(i), y1(i)
+         y1(i) = y1(i) * 1.E-19
+      ENDDO
+      CLOSE(kin)
+ 
+      CALL addpnt(x1,y1,kdata,n,x1(1)*(1.-deltax),0.)
+      CALL addpnt(x1,y1,kdata,n,               0.,0.)
+      CALL addpnt(x1,y1,kdata,n,x1(n)*(1.+deltax),0.)
+      CALL addpnt(x1,y1,kdata,n,           1.e+38,0.)
+      CALL inter2(nw,wl,yg,n,x1,y1,ierr)
+      IF (ierr .NE. 0) THEN
+         WRITE(*,*) ierr, jlabel(j)
+         STOP
+      ENDIF
+
+* quantum yields assumed unity
+
+      qy = 1.
+
+      DO iw = 1, nw-1
+        DO i = 1, nz
+          sq(j,i,iw)   = qy * yg(iw)
+        ENDDO
+      ENDDO 
+
+      END
+
+*=============================================================================*
+
+      SUBROUTINE r125(nw,wl,wc,nz,tlev,airden,j,sq,jlabel)
+
+*-----------------------------------------------------------------------------*
+*=  PURPOSE:                                                                 =*
+*=  Provide product (cross section) x (quantum yield) for ClO photolysis     =*
+*=       ClO + hv -> Cl + O                                                  =*
+*=                                                                           =*
+*=  Cross section: from Maric and Burrows 1999                               =*
+*=  Quantum yield: Assumed to be unity                                       =*
+*-----------------------------------------------------------------------------*
+*=  PARAMETERS:                                                              =*
+*=  NW     - INTEGER, number of specified intervals + 1 in working        (I)=*
+*=           wavelength grid                                                 =*
+*=  WL     - REAL, vector of lower limits of wavelength intervals in      (I)=*
+*=           working wavelength grid                                         =*
+*=  WC     - REAL, vector of center points of wavelength intervals in     (I)=*
+*=           working wavelength grid                                         =*
+*=  NZ     - INTEGER, number of altitude levels in working altitude grid  (I)=*
+*=  TLEV   - REAL, temperature (K) at each specified altitude level       (I)=*
+*=  AIRDEN - REAL, air density (molec/cc) at each altitude level          (I)=*
+*=  J      - INTEGER, counter for number of weighting functions defined  (IO)=*
+*=  SQ     - REAL, cross section x quantum yield (cm^2) for each          (O)=*
+*=           photolysis reaction defined, at each defined wavelength and     =*
+*=           at each defined altitude level                                  =*
+*=  JLABEL - CHARACTER*50, string identifier for each photolysis reaction (O)=*
+*=           defined                                                         =*
+*-----------------------------------------------------------------------------*
+
+      IMPLICIT NONE
+      INCLUDE 'params'
+
+* input
+
+      INTEGER nw
+      REAL wl(kw), wc(kw)
+      
+      INTEGER nz
+
+      REAL tlev(kz)
+      REAL airden(kz)
+
+* weighting functions
+
+      CHARACTER*50 jlabel(kj)
+      REAL sq(kj,kz,kw)
+
+* input/output:
+
+      INTEGER j
+
+* data arrays
+
+      INTEGER kdata
+      PARAMETER(kdata=500)
+
+      INTEGER iw
+      INTEGER i, n
+      REAL x1(kdata)
+      REAL y1(kdata)
+      INTEGER ierr
+
+* local
+
+      REAL yg(kw)
+      REAL qy1, qy2
+
+      real tmp(12), x(kdata), y(kdata,12), tx
+      real xdum
+      integer m, nn, ii
+      real ygt(kw, 12), yy
+      INTEGER m1, m2
+
+**************** ClO photodissociation
+
+      j = j+1
+      jlabel(j) = 'ClO -> Cl + O(1D)'
+      j = j+1
+      jlabel(j) = 'ClO -> Cl + O(3P)'
+
+* cross section from 
+* Maric D. and J.P. Burrows, J. Quantitative Spectroscopy and 
+* Radiative Transfer 62, 345-369, 1999.  Data was downloaded from 
+* their web site on 15 Septmeber 2009.
+
+
+      OPEN(UNIT=kin,FILE='DATAJ1/ABS/ClO_spectrum.prn',STATUS='OLD')
+      DO i = 1, 2
+         READ(kin,*)
+      ENDDO
+      nn = 453
+      DO ii = 1, nn
+         i = nn - ii + 1
+         READ(kin,*) xdum, x(i), xdum, (y(i,m), m = 1, 12)
+      ENDDO
+      CLOSE(kin)
+
+      DO m = 1, 12
+         tmp(m) = 190. + 10.*FLOAT(m-1)
+         IF(m .EQ. 1) tmp(m) = 180.
+
+         DO i = 1, nn
+            x1(i) = x(i)
+            y1(i) = y(i,m)
+         ENDDO
+         n = nn
+
+         CALL addpnt(x1,y1,kdata,n,x1(1)*(1.-deltax),0.)
+         CALL addpnt(x1,y1,kdata,n,               0.,0.)
+         CALL addpnt(x1,y1,kdata,n,x1(n)*(1.+deltax),0.)
+         CALL addpnt(x1,y1,kdata,n,           1.e+38,0.)
+         CALL inter2(nw,wl,yg,n,x1,y1,ierr)
+         IF (ierr .NE. 0) THEN
+            WRITE(*,*) ierr, jlabel(j)
+            STOP
+         ENDIF
+         
+         DO iw = 1, nw-1
+            ygt(iw,m) = yg(iw)
+         ENDDO
+
+      ENDDO
+
+      DO i = 1, nz
+
+         tx = tlev(i)
+
+* locate temperature indices for interpolation:
+         m1 = 1 + INT((tx - 190.)/10.)
+         m1 = MAX(1 ,m1)
+         m1 = MIN(11,m1)
+         m2 = m1 + 1
+
+         DO iw = 1, nw-1
+
+            yy = ygt(iw,m1) + (ygt(iw,m2)-ygt(iw,m1))
+     $           *(tx-tmp(m1))/(tmp(m2)-tmp(m1))
+
+* threshold for O(1D) productionis 263.4 nm:
+
+            if(wc(iw) .lt. 263.4) then
+               qy1 = 1.
+            else
+               qy1 = 0.
+            endif
+            qy2 = 1. - qy1
+
+            sq(j-1,i,iw) = qy1 * yy
+            sq(j,i,iw)   = qy2 * yy
+
+         ENDDO
+      ENDDO 
+
+c      do iw = 1, nw-1
+c         write(33,*) iw, wl(iw), sq(j,1,iw)
+c         write(33,*) iw, wl(iw+1), sq(j,1,iw)
+c      enddo
+
+      END
+
+*=============================================================================*
+
+      SUBROUTINE r126(nw,wl,wc,nz,tlev,airden,j,sq,jlabel)
+
+*-----------------------------------------------------------------------------*
+*=  PURPOSE:                                                                 =*
+*=  Provide product (cross section) x (quantum yield) for nitryl chloride    =*
+*=       ClNO2 -> Cl + NO2                                                   =*
+*=                                                                           =*
+*=  Cross section: from JPL 2006                                             =*
+*=  Quantum yield: Assumed to be unity                                       =*
+*-----------------------------------------------------------------------------*
+*=  PARAMETERS:                                                              =*
+*=  NW     - INTEGER, number of specified intervals + 1 in working        (I)=*
+*=           wavelength grid                                                 =*
+*=  WL     - REAL, vector of lower limits of wavelength intervals in      (I)=*
+*=           working wavelength grid                                         =*
+*=  WC     - REAL, vector of center points of wavelength intervals in     (I)=*
+*=           working wavelength grid                                         =*
+*=  NZ     - INTEGER, number of altitude levels in working altitude grid  (I)=*
+*=  TLEV   - REAL, temperature (K) at each specified altitude level       (I)=*
+*=  AIRDEN - REAL, air density (molec/cc) at each altitude level          (I)=*
+*=  J      - INTEGER, counter for number of weighting functions defined  (IO)=*
+*=  SQ     - REAL, cross section x quantum yield (cm^2) for each          (O)=*
+*=           photolysis reaction defined, at each defined wavelength and     =*
+*=           at each defined altitude level                                  =*
+*=  JLABEL - CHARACTER*50, string identifier for each photolysis reaction (O)=*
+*=           defined                                                         =*
+*-----------------------------------------------------------------------------*
+
+      IMPLICIT NONE
+      INCLUDE 'params'
+
+* input
+
+      INTEGER nw
+      REAL wl(kw), wc(kw)
+      
+      INTEGER nz
+
+      REAL tlev(kz)
+      REAL airden(kz)
+
+* weighting functions
+
+      CHARACTER*50 jlabel(kj)
+      REAL sq(kj,kz,kw)
+
+* input/output:
+
+      INTEGER j
+
+* data arrays
+
+      INTEGER kdata
+      PARAMETER(kdata=150)
+
+      INTEGER iw
+      INTEGER i, n
+      REAL x1(kdata)
+      REAL y1(kdata)
+      INTEGER ierr
+
+* local
+
+      REAL yg(kw)
+      REAL qy
+
+**************** ClNO2 photodissociation
+
+      j = j+1
+      jlabel(j) = 'ClNO2 -> Cl + NO2'
+
+* cross section from 
+* JPL 2006
+
+      OPEN(UNIT=kin,FILE='DATAJ1/ABS/ClNO2.abs',STATUS='OLD')
+      DO i = 1, 2
+         READ(kin,*)
+      ENDDO
+      n = 26
+      DO i = 1, n
+         READ(kin,*) x1(i), y1(i)
+         y1(i) = y1(i) * 1.E-20
+      ENDDO
+      CLOSE(kin)
+ 
+      CALL addpnt(x1,y1,kdata,n,x1(1)*(1.-deltax),0.)
+      CALL addpnt(x1,y1,kdata,n,               0.,0.)
+      CALL addpnt(x1,y1,kdata,n,x1(n)*(1.+deltax),0.)
+      CALL addpnt(x1,y1,kdata,n,           1.e+38,0.)
+      CALL inter2(nw,wl,yg,n,x1,y1,ierr)
+      IF (ierr .NE. 0) THEN
+         WRITE(*,*) ierr, jlabel(j)
+         STOP
+      ENDIF
+
+* quantum yields assumed unity
+
+      qy = 1.
+
+      DO iw = 1, nw-1
+        DO i = 1, nz
+          sq(j,i,iw)   = qy * yg(iw)
+        ENDDO
+      ENDDO 
+
+      END
 
 
       SUBROUTINE rm116(nw,wl,wc,nz,tlev,airden,j,sq,jlabel)

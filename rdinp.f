@@ -593,7 +593,10 @@ c      finame = tmpfil(1:nlen)
       nmj = 0
       DO i = 1, kj
          READ(kin,200,err=20) lj(i), idum, jlabel(i)
-         IF (idum .NE. i) STOP 'error in photolysis reaction list'
+         IF (idum .NE. i) then
+           print *, lj(i), idum, jlabel(i)
+           STOP 'error in photolysis reaction list!'
+         ENDIF
          nj = nj  + 1
          IF(lj(i)) THEN
             nmj = nmj + 1

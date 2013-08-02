@@ -21,7 +21,7 @@
 *  wavelength dependent
       PARAMETER(ks=60)
 *  wavelength and altitude dependent
-      PARAMETER(kj=90)
+      PARAMETER(kj=150)
 
 * delta for adding points at beginning or end of data grids
       REAL deltax
