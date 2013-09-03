@@ -47,10 +47,10 @@ F 26 Previtamin-D3 (CIE 2006)
 F 27 NMSC (CIE 2006)                                   
 ===== Available photolysis reactions:
 F  1 O2 -> O + O                                       
-F  2 O3 -> O2 + O(1D)                                  
+T  2 O3 -> O2 + O(1D)                                  
 F  3 O3 -> O2 + O(3P)                                  
 F  4 HO2 -> OH + O                                     
-F  5 H2O2 -> 2 OH                                      
+T  5 H2O2 -> 2 OH                                      
 F  6 NO2 -> NO + O(3P)                                 
 F  7 NO3 -> NO + O2                                    
 F  8 NO3 -> NO2 + O(3P)                                
@@ -62,8 +62,8 @@ F 13 HNO3 -> OH + NO2
 F 14 HNO4 -> HO2 + NO2                                 
 F 15 NO3-(aq) -> NO2(aq) + O-                          
 F 16 NO3-(aq) -> NO2-(aq) + O(3P)                      
-F 17 CH2O -> H + HCO                                   
-F 18 CH2O -> H2 + CO                                   
+T 17 CH2O -> H + HCO                                   
+T 18 CH2O -> H2 + CO                                   
 F 19 CH3CHO -> CH3 + HCO                               
 F 20 CH3CHO -> CH4 + CO                                
 F 21 CH3CHO -> CH3CO + H                               
@@ -130,10 +130,10 @@ F 81 CF3Br (Halon-1301) -> Products
 F 82 CF2BrCF2Br (Halon-2402) -> Products               
 F 83 CF2Br2 (Halon-1202) -> Products                   
 F 84 CF2BrCl (Halon-1211) -> Products                  
-T 85 (CH3)2NNO -> Products                             
-T 86 ClO -> Cl + O(1D)                                 
-T 87 ClO -> Cl + O(3P)                                 
-T 88 ClNO2 -> Cl + NO2                                 
+F 85 (CH3)2NNO -> Products                             
+F 86 ClO -> Cl + O(1D)                                 
+F 87 ClO -> Cl + O(3P)                                 
+F 88 ClNO2 -> Cl + NO2                                 
 F 89 nC3H7CHO -> nC3H7 + HCO                           
 F 90 nC3H7CHO -> C2H4 + CH3CHO                         
 F 91 iC3H7CHO -> iC3H7 + HCO                           
